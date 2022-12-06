@@ -1,17 +1,12 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-function connectDB(){
-    //database connection
-    mongoose.connect(process.env.MONGO_CONNECTION_URL, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology:true, useFindAndModify: true});
-
-    const connection = mongoose.connection;
-    //url has password and etc therefore we will use env package
-    connection.once('open',()=>{
-        console.log('Database connected');
-    }).catch(err => {
-        console.log('Connection failed');
-    })
-}
+    const connectDB = () =>{
+        mongoose.connect("mongodb+srv://falconShareuser:QCLvqoXfamVRDCR3@cluster0.ldqfbg0.mongodb.net/falconShare?retryWrites=true&w=majority",{useUnifiedTopology:true , useNewUrlParser:true  }).then((data)=>{
+            console.log(`Mongodb connected with server : ${data.connection.host}`)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
 
 module.exports = connectDB;
